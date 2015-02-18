@@ -10,7 +10,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block
 import org.bukkit.generator.BlockPopulator;
 import org.mcsg.plotmaster.schematic.Border;
-import org.mcsg.plotmaster.schematic.Schematic.SchematicBlock;
+import org.mcsg.plotmaster.schematic.SchematicBlock;
 
 
 class GridPopulator extends BlockPopulator{
