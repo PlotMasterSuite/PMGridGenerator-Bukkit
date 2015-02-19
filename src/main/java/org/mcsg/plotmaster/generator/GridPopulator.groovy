@@ -18,51 +18,54 @@ class GridPopulator extends BlockPopulator{
 	Map settings
 	int top
 	int h, w
-	
-	
+
+
 	Border border
-	
+
 	def GridPopulator(Map settings, int top){
 		this.settings = settings
 		this.top = top
-		
-		h = settings.cellHeight
-		w = settings.cellWidth
-		
-		border = Border.load(settings.border)
+
+		h = settings.grid.height
+		w = settings.grid.width
+
+		border = Border.load(settings.grid.border)
+		print "$w:$h"
 	}
-	
-	
-	
-	
+
+
+
+
 	@CompileStatic
 	@Override
 	public void populate(World world, Random rand, Chunk chunk) {
 		if(!border){
 			return
 		}
-		
-		
-		for(cx in 0..16){
-			for(cz in 0..16){
-				int x = cx * chunk.getX()
-				int z = cz * chunk.getZ()
+
+
+		for (int cx = 0; cx < 16; cx++){
+			for (int cz = 0; cz < 16; cz++){
+				int x = cx + ( 16 * chunk.getX())
+				int z = cz + ( 16 *  chunk.getZ())
+
+			//	print "${cx} * ${chunk.getX()} = ${x} : ${cz} * ${chunk.getZ()} =${z}"
 				
-				SchematicBlock[] blocks = border.getColumnAt(x, z, w, h, top)
-				
+				SchematicBlock[] blocks = border.getColumnAt(x, z, w, h)
+
 				blocks.eachWithIndex { SchematicBlock block, int i ->
-					Block b = chunk.getBlock(cx, top + i, cz)
-					
+					Block b = chunk.getBlock(cx, top + 1 + i, cz)
+
 					b.setType(Material.valueOf(block.material))
 					b.setData(block.getData())
 				}
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

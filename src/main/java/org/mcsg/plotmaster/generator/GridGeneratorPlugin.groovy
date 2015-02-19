@@ -13,12 +13,12 @@ class GridGeneratorPlugin extends JavaPlugin{
 	void onEnable(){
 		List list = PlotMaster.getInstance().getConfigurationSelectionPerManagerType("grid")
 		
-		list.forEach {
+		list.forEach { 
 			settings.put(it.world, it)
 		}
 		
 		
-	}
+	} 
 
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {

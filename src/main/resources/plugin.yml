@@ -2,5 +2,6 @@ name: PMGridGenerator
 authors: [Double0negative, MCSG]
 version: 0.0.1
 main: org.mcsg.plotmaster.generator.GridGeneratorPlugin
-depends: [GroovyRuntime, PlotMaster]
+load: STARTUP
+depend: [GroovyRuntime, PlotMaster]
 
