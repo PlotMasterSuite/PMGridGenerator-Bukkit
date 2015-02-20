@@ -8,8 +8,10 @@ import java.util.TreeMap;
 
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+
 import static java.lang.Math.*;
 
 class GridGenerator extends ChunkGenerator{
@@ -17,7 +19,8 @@ class GridGenerator extends ChunkGenerator{
 	private Map<String, Object> settings;
 	private TreeMap<Integer, Material> blocks = new TreeMap<>();
 	private int top;
-
+	private List<BlockPopulator> pops;
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 
 	//Messy stuff to load settings from groovy
@@ -34,10 +37,14 @@ class GridGenerator extends ChunkGenerator{
 
 		top = blocks.lastKey().intValue();
 		System.out.println(top);
+		
+		pops = Arrays.asList((BlockPopulator)new GridPopulator(settings, top));
 	}
 
+	
 	@Override
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid) {
+		
 		byte[][] result = new byte[world.getMaxHeight() / 16][];
 
 		Material cur = Material.AIR;
@@ -47,12 +54,12 @@ class GridGenerator extends ChunkGenerator{
 				cur = get;
 			for(int x = 0; x < 16; x++){
 				for(int z = 0; z < 16; z++){
-
-
 					setBlock(result, x, y, z, (byte)cur.getId());
+					biomeGrid.setBiome(x, z , Biome.PLAINS);
 				}
 			}
 		}
+		
 		return result;
 	}
 
@@ -66,7 +73,7 @@ class GridGenerator extends ChunkGenerator{
 
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world) {
-		return Arrays.asList((BlockPopulator)new GridPopulator(settings, top));
+		return pops;
 	}
 
 

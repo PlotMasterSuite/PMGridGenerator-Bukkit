@@ -4,6 +4,7 @@ import groovy.transform.CompileStatic;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -22,6 +23,8 @@ class GridPopulator extends BlockPopulator{
 
 	Border border
 
+	File file = new File("file.txt")
+	
 	def GridPopulator(Map settings, int top){
 		this.settings = settings
 		this.top = top
@@ -31,6 +34,9 @@ class GridPopulator extends BlockPopulator{
 
 		border = Border.load(settings.grid.border)
 		print "$w:$h"
+		
+		file.delete()
+		file.createNewFile()
 	}
 
 
@@ -42,7 +48,9 @@ class GridPopulator extends BlockPopulator{
 		if(!border){
 			return
 		}
-
+		
+		GridGeneratorPlugin.set.add("${chunk.getX()}:${chunk.getZ()}".toString())
+		
 
 		for (int cx = 0; cx < 16; cx++){
 			for (int cz = 0; cz < 16; cz++){
@@ -54,7 +62,7 @@ class GridPopulator extends BlockPopulator{
 				SchematicBlock[] blocks = border.getColumnAt(x, z, w, h)
 
 				blocks.eachWithIndex { SchematicBlock block, int i ->
-					Block b = chunk.getBlock(cx, top + 1 + i, cz)
+					Block b = chunk.getWorld().getBlockAt(x, top + i, z)
 
 					b.setType(Material.valueOf(block.material))
 					b.setData(block.getData())
