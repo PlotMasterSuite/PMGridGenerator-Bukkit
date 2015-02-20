@@ -22,8 +22,6 @@ class GridPopulator extends BlockPopulator{
 
 
 	Border border
-
-	File file = new File("file.txt")
 	
 	def GridPopulator(Map settings, int top){
 		this.settings = settings

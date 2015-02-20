@@ -40,9 +40,7 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
 		gen = new GridGenerator(settings.get(worldName));
 	}
-	
-	File file = new File("file2.txt");
-	
+		
 	@EventHandler
 	@CompileStatic
 	public void load(ChunkPopulateEvent e){
