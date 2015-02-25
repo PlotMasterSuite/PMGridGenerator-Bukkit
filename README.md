@@ -1,2 +1,2 @@
 # PMGridGenerator-Bukkit
-Grid Generator for PlotMaster
+Default Grid Generator for PlotMaster
