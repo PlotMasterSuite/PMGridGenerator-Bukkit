@@ -22,7 +22,8 @@ class GridPopulator extends BlockPopulator{
 
 
 	Border border
-	
+	int w2
+
 	def GridPopulator(Map settings, int top){
 		this.settings = settings
 		this.top = top
@@ -32,9 +33,9 @@ class GridPopulator extends BlockPopulator{
 
 		border = Border.load(settings.grid.border)
 		print "$w:$h"
-		
-		file.delete()
-		file.createNewFile()
+
+		w2 = 2 * border.getWidth()
+
 	}
 
 
@@ -46,24 +47,26 @@ class GridPopulator extends BlockPopulator{
 		if(!border){
 			return
 		}
-		
+
 		GridGeneratorPlugin.set.add("${chunk.getX()}:${chunk.getZ()}".toString())
-		
+
 
 		for (int cx = 0; cx < 16; cx++){
 			for (int cz = 0; cz < 16; cz++){
 				int x = cx + ( 16 * chunk.getX())
 				int z = cz + ( 16 *  chunk.getZ())
 
-			//	print "${cx} * ${chunk.getX()} = ${x} : ${cz} * ${chunk.getZ()} =${z}"
-				
-				SchematicBlock[] blocks = border.getColumnAt(x, z, w, h)
+				//	print "${cx} * ${chunk.getX()} = ${x} : ${cz} * ${chunk.getZ()} =${z}"
+
+				SchematicBlock[] blocks = border.getColumnAt(x, z, w + w2 , h + w2)
 
 				blocks.eachWithIndex { SchematicBlock block, int i ->
-					Block b = chunk.getWorld().getBlockAt(x, top + i, z)
+					if(block) {
+						Block b = chunk.getWorld().getBlockAt(x, top + i, z)
 
-					b.setType(Material.valueOf(block.material))
-					b.setData(block.getData())
+						b.setType(Material.valueOf(block.material))
+						b.setData(block.getData())
+					}
 				}
 			}
 		}

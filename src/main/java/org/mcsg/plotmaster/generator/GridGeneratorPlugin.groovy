@@ -31,9 +31,6 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 		
 		Bukkit.getPluginManager().registerEvents(this,this)
 		
-		
-		file.delete()
-		file.createNewFile()
 	} 
 
 	@Override
@@ -52,7 +49,7 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 			print set.size()
 		
 		if(!b){
-			print "Failed to populate ${chunk.getX()}:${chunk.getZ()}.. Attempting to repopulate. Report to spigot!"
+			print "Failed to populate ${chunk.getX()}:${chunk.getZ()}.. Attempting to repopulate."
 			for(BlockPopulator pop : gen.getDefaultPopulators(null)){
 				pop.populate(e.getWorld(), null, e.getChunk())
 			}
