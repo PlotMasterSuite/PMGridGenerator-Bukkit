@@ -3,5 +3,5 @@ authors: [Double0negative, MCSG]
 version: 0.0.1
 main: org.mcsg.plotmaster.generator.GridGeneratorPlugin
 load: STARTUP
-depend: [GroovyRuntime, PlotMaster]
+soft-depend: [GroovyRuntime, PlotMaster]
 
