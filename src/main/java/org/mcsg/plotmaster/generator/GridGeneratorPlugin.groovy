@@ -25,7 +25,7 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 	void onEnable(){
 		List list = PlotMaster.getInstance().getConfigurationSelectionPerManagerType("grid")
 		
-		list.forEach { 
+		list.each { 
 			settings.put(it.world, it)
 		}
 		
