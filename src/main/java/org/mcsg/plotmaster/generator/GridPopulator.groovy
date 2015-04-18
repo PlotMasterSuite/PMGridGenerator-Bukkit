@@ -22,7 +22,7 @@ class GridPopulator extends BlockPopulator{
 
 
 	Border border
-	int w2
+	int bx, bz
 
 	def GridPopulator(Map settings, int top){
 		this.settings = settings
@@ -34,7 +34,8 @@ class GridPopulator extends BlockPopulator{
 		border = Border.load(settings.grid.border)
 		print "$w:$h"
 
-		w2 = 2 * border.getWidth()
+		bx = border.getWidth(SFace.EAST) + border.getWidth(SOUTH_WEST)
+		bz = border.getWidth(SFace.NORTH) + border.getWidth(SFace.SOUTH)
 
 	}
 
@@ -58,7 +59,7 @@ class GridPopulator extends BlockPopulator{
 
 				//	print "${cx} * ${chunk.getX()} = ${x} : ${cz} * ${chunk.getZ()} =${z}"
 
-				SchematicBlock[] blocks = border.getColumnAt(x, z, w + w2 , h + w2)
+				SchematicBlock[] blocks = border.getColumnAt(x, z, w + bx , h + bz)
 
 				blocks.eachWithIndex { SchematicBlock block, int i ->
 					if(block) {

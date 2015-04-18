@@ -18,7 +18,7 @@
 		</repository>
 		<repository>
 			<id>mcsg-repo</id>
-			<url>http://ci.mc-sg.com/plugin/repository/everything</url>
+			<url>http://ci.mc-sg.org/plugin/repository/everything</url>
 		</repository>
 	</repositories>
 	<build>

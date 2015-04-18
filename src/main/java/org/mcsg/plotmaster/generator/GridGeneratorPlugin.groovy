@@ -14,6 +14,7 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator
 import org.bukkit.plugin.java.JavaPlugin
 import org.mcsg.plotmaster.PlotMaster;
+@CompileStatic
 
 class GridGeneratorPlugin extends JavaPlugin implements Listener{
 
@@ -25,8 +26,11 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 	void onEnable(){
 		List list = PlotMaster.getInstance().getConfigurationSelectionPerManagerType("grid")
 		
-		list.each { 
-			settings.put(it.world, it)
+		println list
+		
+		list.each { Map m ->
+			println m
+			settings.put(m.world.toString(), m)
 		}
 		
 		Bukkit.getPluginManager().registerEvents(this,this)
@@ -39,7 +43,6 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 	}
 		
 	@EventHandler
-	@CompileStatic
 	public void load(ChunkPopulateEvent e){
 		Chunk chunk = e.getChunk()
 		
