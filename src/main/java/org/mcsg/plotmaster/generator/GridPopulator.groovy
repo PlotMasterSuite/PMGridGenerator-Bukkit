@@ -1,6 +1,7 @@
 package org.mcsg.plotmaster.generator
 
 import groovy.transform.CompileStatic;
+import groovy.transform.TypeCheckingMode;
 
 import java.util.Random;
 
@@ -11,9 +12,10 @@ import org.bukkit.World;
 import org.bukkit.block.Block
 import org.bukkit.generator.BlockPopulator;
 import org.mcsg.plotmaster.schematic.Border;
+import org.mcsg.plotmaster.schematic.SFace;
 import org.mcsg.plotmaster.schematic.SchematicBlock;
 
-
+@CompileStatic
 class GridPopulator extends BlockPopulator{
 
 	Map settings
@@ -24,6 +26,7 @@ class GridPopulator extends BlockPopulator{
 	Border border
 	int bx, bz
 
+	@CompileStatic(TypeCheckingMode.SKIP)
 	def GridPopulator(Map settings, int top){
 		this.settings = settings
 		this.top = top
@@ -34,7 +37,7 @@ class GridPopulator extends BlockPopulator{
 		border = Border.load(settings.grid.border)
 		print "$w:$h"
 
-		bx = border.getWidth(SFace.EAST) + border.getWidth(SOUTH_WEST)
+		bx = border.getWidth(SFace.EAST) + border.getWidth(SFace.WEST)
 		bz = border.getWidth(SFace.NORTH) + border.getWidth(SFace.SOUTH)
 
 	}
