@@ -44,6 +44,8 @@ class GridGeneratorPlugin extends JavaPlugin implements Listener{
 		
 	@EventHandler
 	public void load(ChunkPopulateEvent e){
+		if(!gen) return;
+		
 		Chunk chunk = e.getChunk()
 		
 		boolean b = set.remove("${chunk.getX()}:${chunk.getZ()}".toString())
